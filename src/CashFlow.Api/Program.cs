@@ -2,11 +2,12 @@ using CashFlow.Api.Filters;
 using CashFlow.Api.Middleware;
 using CashFlow.Application;
 using CashFlow.Infrastructure;
-using CashFlow.Infrastructure.DataAccess;
+using CashFlow.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -89,7 +90,11 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-await MigrateDatabase();
+if (builder.Configuration.IsTestEnvironment() == false)
+{
+    await MigrateDatabase();
+}
+
 
 app.Run();
 
@@ -99,3 +104,5 @@ async Task MigrateDatabase()
 
     await DatabaseMigration.MigrateDatabase(scope.ServiceProvider);
 }
+
+public partial class Program { }
