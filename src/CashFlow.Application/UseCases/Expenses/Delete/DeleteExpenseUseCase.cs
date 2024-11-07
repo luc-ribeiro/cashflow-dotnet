@@ -30,7 +30,7 @@ public class DeleteExpenseUseCase : IDeleteExpenseUseCase
     {
         var loggedUser = await _loggedUser.Get();
 
-        var expense = _expenseReadOnly.GetById(loggedUser, id);
+        var expense = await _expenseReadOnly.GetById(loggedUser, id);
         if (expense is null)
         {
             throw new NotFoundException(ResourceErrorMessages.EXPENSE_NOT_FOUND);
