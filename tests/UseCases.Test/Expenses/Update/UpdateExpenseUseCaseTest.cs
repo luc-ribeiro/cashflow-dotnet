@@ -26,13 +26,11 @@ public class UpdateExpenseUseCaseTest
 
         await act.Should().NotThrowAsync();
 
-        expense.Should().NotBeNull();
-        expense.Id.Should().Be(expense.Id);
-        expense.Title.Should().Be(expense.Title);
-        expense.Description.Should().Be(expense.Description);
-        expense.Date.Should().Be(expense.Date);
-        expense.Amount.Should().Be(expense.Amount);
-        expense.PaymentType.Should().Be((CashFlow.Domain.Enums.PaymentType)expense.PaymentType);
+        expense.Title.Should().Be(request.Title);
+        expense.Description.Should().Be(request.Description);
+        expense.Date.Should().Be(request.Date);
+        expense.Amount.Should().Be(request.Amount);
+        expense.PaymentType.Should().Be((CashFlow.Domain.Enums.PaymentType)request.PaymentType);
     }
 
     [Fact]
