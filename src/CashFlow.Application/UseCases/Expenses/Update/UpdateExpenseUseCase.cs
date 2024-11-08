@@ -28,7 +28,7 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
         _repository = repository;
         _loggedUser = loggedUser;
     }
-    public async Task Execute(long id, RequestRegisterExpenseJson request)
+    public async Task Execute(long id, RequestExpenseJson request)
     {
         Validate(request);
 
@@ -48,7 +48,7 @@ public class UpdateExpenseUseCase : IUpdateExpenseUseCase
         await _unitOfWork.Commit();
     }
 
-    private void Validate(RequestRegisterExpenseJson request) 
+    private void Validate(RequestExpenseJson request) 
     {
         var validator = new ExpenseValidator();
 
